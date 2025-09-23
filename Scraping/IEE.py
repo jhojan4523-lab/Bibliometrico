@@ -9,9 +9,9 @@ import time
 
 def scrape_ieee():
 
-    # Crear la carpeta "Data" si no existe
-    if not os.path.exists("Data"):
-        os.makedirs("Data")
+    # Crear la carpeta "Archivos" si no existe
+    if not os.path.exists("Archivos"):
+        os.makedirs("Archivos")
 
     with sync_playwright() as p:
         start_time = time.time()
@@ -63,7 +63,7 @@ def scrape_ieee():
             # Buscar el término deseado
             search_selector = 'input[type="search"]'
             page.wait_for_selector(search_selector, timeout=60000)
-            page.fill(search_selector, "computational thinking")
+            page.fill(search_selector, "generative artificial intelligence")
             page.press(search_selector, "Enter")
 
             # Esperar que los resultados se carguen

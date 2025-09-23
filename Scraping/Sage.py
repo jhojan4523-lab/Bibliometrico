@@ -24,9 +24,9 @@ y guarda los resultados en un archivo BibTeX.
 # -------------------------------------------------------------
 
 def scrape_sage():
-    # Crear la carpeta "Data" si no existe
-    if not os.path.exists("Data"):
-        os.makedirs("Data")
+    # Crear la carpeta "Archivos" si no existe
+    if not os.path.exists("Archivos"):
+        os.makedirs("Archivos")
 
     with sync_playwright() as p:
         start_time = time.time()
