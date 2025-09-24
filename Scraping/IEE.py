@@ -1,3 +1,4 @@
+from dotenv import load_dotenv
 from playwright.sync_api import sync_playwright
 import os
 import re
@@ -7,11 +8,14 @@ import time
 # USO DE CHATGPT PARA LA ESTRUCTURA DE LOS SCRAPES
 # -------------------------------------------------------------
 
+# Carga variables desde .env en la raíz del proyecto
+load_dotenv()
+
 def scrape_ieee():
 
-    # Crear la carpeta "Archivos" si no existe
-    if not os.path.exists("Archivos"):
-        os.makedirs("Archivos")
+    # Crear la carpeta "Data" si no existe
+    if not os.path.exists("Data"):
+        os.makedirs("Data")
 
     with sync_playwright() as p:
         start_time = time.time()
@@ -48,14 +52,16 @@ def scrape_ieee():
 
             # Paso 5: Ingresar el correo electrónico
             email_input_selector = "input#identifierId"
-            page.fill(email_input_selector, "jhojanr")
+            email_user = os.getenv("EMAIL_USER")
+            page.fill(email_input_selector, email_user)
             next_button_selector = "button:has-text('Siguiente')"
             page.click(next_button_selector)
             page.wait_for_load_state("domcontentloaded")
 
             # Paso 6: Ingresar la contraseña
             password_input_selector = "input[name='Passwd']"
-            page.fill(password_input_selector, "conras")
+            password_user = os.getenv("EMAIL_PASSWORD")
+            page.fill(password_input_selector, password_user)
             page.click(next_button_selector)
             page.wait_for_load_state("domcontentloaded")
             print("Login exitoso, listo para comenzar el scraping.")
